@@ -46,16 +46,22 @@ Required environment variables include:
 - `JWT_EXPIRATION`
 - `SESSION_SECRET`
 
-### 5. RapidAPI Setup
+### 5. MongoDB Setup
+
+1. Make sure MongoDB is installed on your system.
+2. Start the MongoDB server locally:
+   - **Windows**: Navigate to the MongoDB installation directory (typically `C:\Program Files\MongoDB\Server\7.0\bin`) and double-click on `mongod.exe` to run the server.
+   - **Mac/Linux**: Open a terminal and run `mongod`
+3. Verify the MongoDB server is running:
+   - The MongoDB service should be active and listening on port 27017
+   - The connection string in your `.env` file should match: `mongodb://localhost:27017/Mutual-fund-broker?authSource=admin`
+4. The application will automatically connect to this database when started.
+
+### 6. RapidAPI Setup
 
 1. Sign up for an account on [RapidAPI](https://rapidapi.com/) to obtain your own API key.
 2. The application integrates with the [Latest Mutual Fund NAV API](https://rapidapi.com/suneetk92/api/latest-mutual-fund-nav) to fetch mutual fund data.
 3. The implementation specifically fetches open-ended schemes and provides functionality to filter by fund family.
-
-### 6. Database Setup
-
-1. Ensure MongoDB server is running on your local system.
-2. The application will automatically connect to the database specified in your `.env` file.
 
 ### 7. Run the Application
 
@@ -129,6 +135,8 @@ The system implements JWT-based authentication with the following features:
    - Ensure MongoDB is running locally (`mongod` service)
    - Verify the connection string in your `.env` file
    - Check network configuration if using a remote MongoDB instance
+   - On Windows, check if MongoDB service is running in Services
+   - Try connecting with MongoDB Compass to verify the connection
 
 2. **RapidAPI key issues**
    - Verify your RapidAPI key is correctly set in the `.env` file
@@ -138,7 +146,7 @@ The system implements JWT-based authentication with the following features:
 3. **Build errors**
    - Check for TypeScript errors in your codebase
    - Ensure all dependencies are correctly installed
-   - Try removing `node_modules` and `package-lock.json`, then run `npm install` again,then do `npm run build` ,once build is successfull run the server with command ``npm run dev-start``
+   - Try removing `node_modules` and `package-lock.json`, then run `npm install` again, then do `npm run build`, once build is successful run the server with command `npm run dev-start`
 
 ## Contributing
 
