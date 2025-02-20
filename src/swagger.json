@@ -1,0 +1,307 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"HttpSuccess": {
+				"properties": {
+					"status": {
+						"anyOf": [
+							{
+								"type": "number",
+								"format": "double"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"message": {
+						"type": "string"
+					},
+					"results": {}
+				},
+				"required": [
+					"status",
+					"message",
+					"results"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IClientData": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "mutual-fund-broker-backend",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/mfb/mutual-funds/fetch-funds": {
+			"get": {
+				"operationId": "FetchAndStoreFunds",
+				"responses": {
+					"200": {
+						"description": "fetched",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpSuccess"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"mutual-funds"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/mfb/mutual-funds/get-paginated-funds": {
+			"get": {
+				"operationId": "GetPaginatedActionPlansForSupplier",
+				"responses": {
+					"200": {
+						"description": "fetched",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpSuccess"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"mutual-funds"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "pageNum",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "sort",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/mfb/client/sign-up": {
+			"post": {
+				"operationId": "CreateClient",
+				"responses": {
+					"201": {
+						"description": "created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpSuccess"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"clients"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IClientData"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/mfb/client/auth/check": {
+			"get": {
+				"operationId": "ValidateAuthenticationCheck",
+				"responses": {
+					"200": {
+						"description": "fetched",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpSuccess"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"clients"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/mfb/client/auth": {
+			"post": {
+				"operationId": "AuthenticateUser",
+				"responses": {
+					"201": {
+						"description": "created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpSuccess"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"clients"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/mfb/client/logout": {
+			"post": {
+				"operationId": "LogoutUser",
+				"responses": {
+					"200": {
+						"description": "fetched",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpSuccess"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"clients"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/mfb/client/add-scheme-portfolio": {
+			"post": {
+				"operationId": "AddSchemePortfolio",
+				"responses": {
+					"201": {
+						"description": "created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpSuccess"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"clients"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/mfb/client/get-portfolio": {
+			"get": {
+				"operationId": "GetPortfolio",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpSuccess"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"clients"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "clientId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	],
+	"tags": []
+}
